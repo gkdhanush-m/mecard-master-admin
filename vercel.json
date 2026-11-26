@@ -1,0 +1,9 @@
+{
+  "version": 2,
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/", "destination": "/index.html" },
+    { "source": "/login", "destination": "/master-login.html" },
+    { "source": "/governance", "destination": "/master-admin.html" }
+  ]
+}

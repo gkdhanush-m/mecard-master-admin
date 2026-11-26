@@ -1,0 +1,9 @@
+{
+  "name": "mecard-master-admin",
+  "version": "1.0.0",
+  "private": true,
+  "description": "MeCard Platform Governance — Multi-Tenant Administration & RBAC Security Console",
+  "scripts": {
+    "start": "npx serve ."
+  }
+}

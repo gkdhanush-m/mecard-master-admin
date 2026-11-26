@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Sign In — MeCard Platform Governance</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+  <link rel="stylesheet" href="admin.css">
+  <style>
+    :root {
+      --login-card-w: 480px;
+    }
+    body.login-page-body {
+      font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 36px 18px;
+      background: var(--bg-page);
+    }
+    .login-container {
+      width: 100%;
+      max-width: var(--login-card-w);
+      margin: 0 auto;
+    }
+    .login-header-branding {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+    .login-logo-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 58px;
+      height: 58px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #b8501e 0%, #0f172a 100%);
+      color: #ffffff;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 22px;
+      font-weight: 800;
+      margin-bottom: 14px;
+      box-shadow: 0 4px 14px rgba(184, 80, 30, 0.25);
+    }
+    .login-main-title {
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      word-spacing: 0.04em;
+      color: var(--text-main);
+      margin-bottom: 8px;
+    }
+    .login-sub-title {
+      font-size: 14.5px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      word-spacing: 0.03em;
+    }
+    .login-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-strong);
+      border-radius: 18px;
+      padding: 36px 30px;
+      box-shadow: var(--shadow-sm);
+    }
+    .login-form-group {
+      margin-bottom: 22px;
+    }
+    .login-label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 14px;
+      font-weight: 700;
+      word-spacing: 0.03em;
+      color: var(--text-main);
+      margin-bottom: 8px;
+    }
+    .login-input {
+      width: 100%;
+      height: 50px;
+      padding: 0 16px;
+      font-size: 15px;
+      color: var(--text-main);
+      background: var(--bg-input);
+      border: 1px solid var(--border-strong);
+      border-radius: 10px;
+      outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    .login-input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-light);
+    }
+    .login-alert-banner {
+      display: none;
+      padding: 14px 16px;
+      border-radius: 10px;
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      color: #991b1b;
+      font-size: 13.5px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+    [data-theme="dark"] .login-alert-banner {
+      background: rgba(239, 68, 68, 0.15);
+      border-color: rgba(239, 68, 68, 0.3);
+      color: #fca5a5;
+    }
+    .btn-login-submit {
+      width: 100%;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: var(--accent);
+      color: #ffffff;
+      font-size: 15.5px;
+      font-weight: 700;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 6px;
+      transition: background 0.18s, transform 0.1s;
+    }
+    .btn-login-submit:hover {
+      background: #9c3f15;
+      transform: translateY(-1px);
+    }
+    .btn-login-submit:active {
+      transform: scale(0.99);
+    }
+    .login-divider {
+      display: flex;
+      align-items: center;
+      text-align: center;
+      margin: 26px 0 20px;
+      color: var(--text-soft);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .login-divider::before, .login-divider::after {
+      content: '';
+      flex: 1;
+      border-bottom: 1px solid var(--border);
+    }
+    .login-divider::before { margin-right: 14px; }
+    .login-divider::after { margin-left: 14px; }
+
+    .quick-roles-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 10px;
+    }
+    .quick-roles-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+    .quick-role-card {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 12px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .quick-role-card:hover {
+      border-color: var(--accent);
+      background: var(--accent-light);
+    }
+    .quick-role-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 3px;
+    }
+    .quick-role-email {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+    }
+    .login-footer-links {
+      margin-top: 26px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      font-size: 13px;
+    }
+    .login-footer-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .login-footer-link:hover {
+      color: var(--accent);
+    }
+  </style>
+</head>
+<body class="login-page-body">
+
+  <div class="login-container">
+    <!-- Branding Header -->
+    <div class="login-header-branding">
+      <div class="login-logo-pill">MC</div>
+      <h1 class="login-main-title">MeCard Platform</h1>
+      <p class="login-sub-title">Master Governance &amp; Multi-Tenant Infrastructure</p>
+    </div>
+
+    <!-- Login Card -->
+    <div class="login-card">
+      <div class="login-alert-banner" id="login-alert-banner"></div>
+
+      <form id="login-form" onsubmit="MasterLoginApp.handleSubmit(event)">
+        <div class="login-form-group">
+          <label class="login-label" for="login-email">
+            <span>Master Admin Email</span>
+          </label>
+          <input class="login-input" id="login-email" type="email" placeholder="e.g. admin@mecard.app" required autocomplete="username">
+        </div>
+
+        <div class="login-form-group">
+          <label class="login-label" for="login-password">
+            <span>Password</span>
+          </label>
+          <input class="login-input" id="login-password" type="password" placeholder="Enter master password (e.g. admin)" required autocomplete="current-password">
+        </div>
+
+        <button class="btn-login-submit" type="submit" id="btn-login-submit">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+          <span>Sign In to Master Console</span>
+        </button>
+      </form>
+
+      <div class="login-divider">Master Credentials</div>
+
+      <div class="quick-roles-title">Click to autofill credentials:</div>
+      <div class="quick-roles-grid">
+        <button type="button" class="quick-role-card" onclick="MasterLoginApp.fill('master@mecard.app', 'admin')">
+          <div class="quick-role-name">Platform Master Admin</div>
+          <div class="quick-role-email">master@mecard.app</div>
+        </button>
+      </div>
+    </div>
+
+    <!-- Footer Links -->
+    <div class="login-footer-links">
+      <a class="login-footer-link" href="index.html">← Back to Visiting Card</a>
+      <span style="color:var(--border);">•</span>
+      <a class="login-footer-link" href="tenant-login.html">Tenant Admin Portal</a>
+    </div>
+  </div>
+
+  <script src="qr-engine.js"></script>
+  <script src="platform-core.js"></script>
+  <script>
+    // Auto-redirect if already authenticated as master_admin
+    (function () {
+      try {
+        const s = window.RBAC && window.RBAC.getSession();
+        if (s && s.role === 'master_admin') {
+          window.location.replace('master-admin.html');
+        }
+      } catch (e) {}
+    })();
+
+    const MasterLoginApp = {
+      fill: function (email, pass) {
+        document.getElementById('login-email').value = email;
+        document.getElementById('login-password').value = pass;
+        MasterLoginApp.clearError();
+      },
+
+      showError: function (msg) {
+        const b = document.getElementById('login-alert-banner');
+        if (b) {
+          b.textContent = msg;
+          b.style.display = 'block';
+        }
+      },
+
+      clearError: function () {
+        const b = document.getElementById('login-alert-banner');
+        if (b) {
+          b.textContent = '';
+          b.style.display = 'none';
+        }
+      },
+
+      handleSubmit: function (e) {
+        e.preventDefault();
+        MasterLoginApp.clearError();
+        const email = document.getElementById('login-email').value.trim();
+        const password = document.getElementById('login-password').value.trim();
+
+        if (!email || !password) {
+          MasterLoginApp.showError('Please enter both your email and password.');
+          return;
+        }
+
+        const res = window.RBAC.login(email, password);
+        console.log('MasterLogin handleSubmit res:', JSON.stringify(res));
+        if (!res.ok) {
+          MasterLoginApp.showError(res.error || 'Invalid credentials. Please verify your email and password.');
+          return;
+        }
+
+        // Strictly verify that the user has master_admin role
+        if (res.role !== 'master_admin') {
+          window.RBAC.logout();
+          MasterLoginApp.showError('Access Denied: The account entered (' + email + ') does not have Platform Master permissions. If you are a tenant administrator, please sign in via the Tenant Portal.');
+          return;
+        }
+
+        window.location.href = 'master-admin.html';
+      }
+    };
+  </script>
+</body>
+</html>
