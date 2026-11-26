@@ -280,7 +280,7 @@
       } catch (e) {}
     })();
 
-    const MasterLoginApp = {
+    window.MasterLoginApp = {
       fill: function (email, pass) {
         document.getElementById('login-email').value = email;
         document.getElementById('login-password').value = pass;
